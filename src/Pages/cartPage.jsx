@@ -16,10 +16,22 @@ function MobileCartItem({ item, incrementQuantity, removeFromCartOneItem }) {
         </div>
         {/* Row 2: Price */}
         <div className="flex justify-center items-center">
-          <p className="text-2xl font-bold">
-            {((item.discountedPrice || item.price) * item.quantity).toFixed(2)}{" "}
-            KR
-          </p>
+          <div className="text-right">
+            {item.discountedPrice && item.discountedPrice < item.price ? (
+              <>
+                <p className="text-2xl font-bold">
+                  {(item.discountedPrice * item.quantity).toFixed(2)} KR
+                </p>
+                <p className="text-gray-500 line-through text-lg">
+                  {(item.price * item.quantity).toFixed(2)} KR
+                </p>
+              </>
+            ) : (
+              <p className="text-2xl font-bold">
+                {(item.price * item.quantity).toFixed(2)} KR
+              </p>
+            )}
+          </div>
         </div>
         {/* Row 3: Action Buttons */}
         <div className="flex justify-between items-center">
@@ -145,7 +157,7 @@ function CartPage() {
       </motion.div>
     );
   } else {
-    // Desktop version (original)
+    // Desktop version
     return (
       <motion.div
         className="grid grid-cols-2 gap-4 mt-56"

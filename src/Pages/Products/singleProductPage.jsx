@@ -14,6 +14,8 @@ function SingleProductPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [buttonText, setButtonText] = useState("ADD TO CART");
+  const [animateText, setAnimateText] = useState(false);
 
   const { addToCart } = useContext(CartContext);
 
@@ -61,6 +63,15 @@ function SingleProductPage() {
       image: product.image?.url,
       category,
     });
+
+    // Change button text to "ADDED TO CART"
+    setAnimateText(true);
+    setButtonText("ADDED TO CART");
+
+    setTimeout(() => {
+      setButtonText("ADD TO CART");
+      setAnimateText(false);
+    }, 2000);
   }
 
   const isMobile = windowWidth < 1350;
@@ -80,7 +91,6 @@ function SingleProductPage() {
         />
       ) : (
         <div className="flex justify-center items-center px-auto pt-56">
-          {/* Wrapper to center both elements */}
           <div className="relative flex flex-col md:flex-row items-center md:items-stretch gap-x-12 mx-auto">
             {/* Main Product Image */}
             <div className="flex justify-center items-center">
@@ -127,7 +137,7 @@ function SingleProductPage() {
 
                 <SubmitButton
                   className="border-t-0 border-l-0 h-[6rem]"
-                  text="ADD TO CART"
+                  text={buttonText}
                   onClick={handleAddToCart}
                 />
               </div>
