@@ -68,7 +68,10 @@ const ProductSection2 = () => {
 
       {/* Mobile-only Button Below the Entire Grid */}
       <div className="mt-8 flex justify-center lg:hidden">
-        <ConceptButton href="/products/all-products" />
+        <ConceptButton
+          href="/products/all-products"
+          className="w-full lg:w-72"
+        />
       </div>
     </section>
   );

@@ -59,7 +59,10 @@ const ProductSection = () => {
               <div className="flex-grow"></div>{" "}
               {/* Spacer to push button down */}
               <div className="flex justify-center lg:justify-end mb-14 mt-8 pt-12 md:pt-0 ">
-                <NavigateButton href="/products/all-products" />
+                <NavigateButton
+                  href="/products/all-products"
+                  className="w-full lg:w-72"
+                />
               </div>
             </div>
           </>
