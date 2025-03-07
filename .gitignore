@@ -5,6 +5,12 @@
 /.pnp
 .pnp.js
 /.history
+.history/        
+**/.history/     
+**/.History/     
+**/localHistory/ 
+**/.localHistory/ 
+*.history 
 
 # testing
 /coverage

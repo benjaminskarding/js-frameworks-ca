@@ -1,13 +1,23 @@
+@import url("https://fonts.googleapis.com/css2?family=Harmattan:wght@400;500;600;700&family=Merriweather+Sans:ital,wght@0,300..800;1,300..800&family=Molengo&family=Oxygen:wght@300;400;700&family=Raleway+Dots&family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  @apply bg-[#CFDADE] text-gray-800;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* Custom Chevron animation properties */
+
+.chevron-icon path {
+  transition: stroke 500ms ease-in-out;
+}
+
+.group:hover .chevron-icon path {
+  stroke: white;
+}
+
+select:focus {
+  background-color: #cfdade;
 }
