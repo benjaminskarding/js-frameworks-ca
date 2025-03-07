@@ -20,20 +20,26 @@ export function CartProvider({ children }) {
     localStorage.setItem("myCart", JSON.stringify(cart));
   }, [cart]);
 
-  // If same item.id, just increment quantity
+  // If same item.id, just increment quantity - FOR WHEN USERS CLICK 'ADD TO CART', NOT THE 'ADD ONE MORE' IN CARTPAGE
   function addToCart(product) {
     setCart((prevCart) => {
       const existing = prevCart.find((item) => item.id === product.id);
       if (existing) {
-        // Already in cart, increment quantity
         return prevCart.map((item) =>
           item.id === product.id
             ? { ...item, quantity: item.quantity + 1 }
             : item
         );
       } else {
-        // New item
-        return [...prevCart, { ...product, quantity: 1 }];
+        return [
+          ...prevCart,
+          {
+            ...product,
+            discountedPrice: product.discountedPrice || null, // Ensure we store both prices
+            price: product.price,
+            quantity: 1,
+          },
+        ];
       }
     });
   }
@@ -58,11 +64,18 @@ export function CartProvider({ children }) {
     );
   }
 
-  // Increase quantity for a single item
+  // Increase quantity for a single item (THIS IS USED FOR THE 'ADD ONE MORE' IN CARTPAGE)
   function incrementQuantity(productId) {
     setCart((prev) =>
       prev.map((item) =>
-        item.id === productId ? { ...item, quantity: item.quantity + 1 } : item
+        item.id === productId
+          ? {
+              ...item,
+              quantity: item.quantity + 1,
+              price: item.price, // Keep original price
+              discountedPrice: item.discountedPrice || null, // Keep discount
+            }
+          : item
       )
     );
   }
@@ -72,7 +85,12 @@ export function CartProvider({ children }) {
     setCart((prev) =>
       prev.map((item) =>
         item.id === productId && item.quantity > 1
-          ? { ...item, quantity: item.quantity - 1 }
+          ? {
+              ...item,
+              quantity: item.quantity - 1,
+              price: item.price, // Keep original price
+              discountedPrice: item.discountedPrice || null, // Keep discount
+            }
           : item
       )
     );
@@ -83,7 +101,7 @@ export function CartProvider({ children }) {
   }
 
   const totalPrice = cart.reduce(
-    (sum, item) => sum + item.price * item.quantity,
+    (sum, item) => sum + (item.discountedPrice || item.price) * item.quantity,
     0
   );
 

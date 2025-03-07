@@ -14,8 +14,7 @@ export default function Footer() {
         <img src="/logoIdea.svg" alt="tidvar logo" className="h-12 my-2" />
         <div className="w-64 lg:w-[30rem] border-t border-black mb-4"></div>
         <h2 className="text-lg lg:text-xl font-semibold">
-          THE DESTINATION FOR ALL THINGS UNIQUE, EVERYDAY, AND EVERYTHING IN
-          BETWEEN.
+          THE DESTINATION FOR ALL THINGS UNIQUE
         </h2>
       </div>
 

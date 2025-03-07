@@ -8,6 +8,19 @@ export default function StoryTime() {
   const sectionRef = useRef(null);
 
   useEffect(() => {
+    if (window.innerWidth < 768) {
+      // If mobile, make elements instantly visible
+      document
+        .querySelectorAll(".header-1, .header-2, .header-3")
+        .forEach((el) => {
+          el.style.opacity = "1";
+          el.style.transform = "none";
+          el.style.visibility = "visible";
+        });
+      return;
+    }
+
+    // Run GSAP animations only on larger screens
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: sectionRef.current,
@@ -15,19 +28,18 @@ export default function StoryTime() {
       },
     });
 
-    tl.fromTo(
-      ".header-1",
-      { x: -250, opacity: 0 },
-      { x: 0, opacity: 1, ease: "power3.out", duration: 3 }
-    )
-
+    tl.set(".header-1, .header-2, .header-3", { visibility: "visible" })
+      .fromTo(
+        ".header-1",
+        { x: -250, opacity: 0 },
+        { x: 0, opacity: 1, ease: "power3.out", duration: 3 }
+      )
       .fromTo(
         ".header-2",
         { x: 250, opacity: 0 },
         { x: 0, opacity: 1, ease: "power3.out", duration: 3 },
         "-=1.2"
       )
-
       .fromTo(
         ".header-3",
         { opacity: 0 },
@@ -47,7 +59,7 @@ export default function StoryTime() {
       {/* Square Dot Positioned Between h2 and p */}
       <div className="w-2 h-2 bg-black my-14"></div>
 
-      <p className="font-oxygen text-2xl font-light md:mx-[30rem]">
+      <p className="font-oxygen text-xl font-light mx-2 lg:mx-[5rem]">
         At TIÐVAR, we believe that every product has a story, and behind every
         great find is craftsmanship, innovation, and quality. Whether it’s
         everyday essentials or rare treasures, we curate goods that elevate your

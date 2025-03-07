@@ -55,7 +55,30 @@ function ProductCategoryPage() {
             <h2 className="text-lg font-medium mt-2 capitalize">
               {product.title}
             </h2>
-            <p className="text-gray-600">{product.price}KR</p>
+            <div className="flex flex-col items-start">
+              {/* Show Discounted Price */}
+              <p className="text-lg font-semibold">
+                {product.discountedPrice}KR
+              </p>
+
+              {/* Show Original Price & Discount % if applicable */}
+              {product.price > product.discountedPrice && (
+                <div className="flex items-center gap-2">
+                  <p className="line-through text-gray-500">
+                    {product.price}KR
+                  </p>
+                  <span className="bg-red-500 text-white text-xs px-2 py-1 rounded">
+                    -
+                    {Math.round(
+                      ((product.price - product.discountedPrice) /
+                        product.price) *
+                        100
+                    )}
+                    %
+                  </span>
+                </div>
+              )}
+            </div>
           </div>
         ))}
       </div>

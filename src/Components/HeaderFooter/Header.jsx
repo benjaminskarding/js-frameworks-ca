@@ -5,6 +5,7 @@ import { findMatchingProduct } from "../../Utilities/findMatchingProduct";
 import { useLocation } from "react-router-dom";
 import { CartContext } from "../../Context/cartContext";
 import MobileHeader from "./mobileHeader";
+import { ProductContext } from "../../Context/productContext";
 
 const ITEM_CATEGORIES = [
   { name: "All Products", apiName: "", marqueeText: "ALL PRODUCTS" },
@@ -33,7 +34,11 @@ export default function Header() {
   const [defaultProduct, setDefaultProduct] = useState(null);
   const [featuredProduct, setFeaturedProduct] = useState(null);
 
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+
   const { cart } = useContext(CartContext);
+  const { allProducts } = useContext(ProductContext);
   const totalItems = cart.reduce((acc, item) => acc + item.quantity, 0);
 
   const location = useLocation();
@@ -102,6 +107,22 @@ export default function Header() {
     setHoveredCategory(category);
     const product = await findMatchingProduct(category);
     setFeaturedProduct(product);
+  }
+
+  function handleSearchChange(e) {
+    const query = e.target.value;
+    setSearchQuery(query);
+
+    if (!query) {
+      setSearchResults([]);
+      return;
+    }
+
+    // Filter allProducts by title matching the query
+    const filtered = allProducts.filter((product) =>
+      product.title.toLowerCase().includes(query.toLowerCase())
+    );
+    setSearchResults(filtered);
   }
 
   return isMobile ? (
@@ -191,7 +212,37 @@ export default function Header() {
           </div>
 
           {/* Middle (blankspace) */}
-          <div className="col-span-4 border-r border-black flex items-center justify-center h-[6rem]"></div>
+          <div className="relative col-span-4 border-r border-black flex items-center justify-center h-[6rem]">
+            <input
+              type="text"
+              placeholder="Search products..."
+              value={searchQuery}
+              onChange={handleSearchChange}
+              className="p-2 bg-transparent text-2xl font-semibold text-center uppercase focus:outline-none w-full h-full"
+            />
+            {/* Search Results Dropdown */}
+            {searchResults.length > 0 && (
+              <div
+                className="absolute top-full mt-0 left-[-1px]
+    w-[calc(100%+2px)] bg-[#cfdade] border border-black z-10 text-center text-2xl uppercase"
+              >
+                {searchResults.slice(0, 8).map((product) => (
+                  <Link
+                    key={product.id}
+                    to={`/product/${product.id}`}
+                    onClick={() => {
+                      // Clear the search when user clicks a result
+                      setSearchQuery("");
+                      setSearchResults([]);
+                    }}
+                    className="block px-4 py-2 hover:bg-gray-200"
+                  >
+                    {product.title}
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
 
           {/* CONTACT */}
           <div className="col-span-1 border-r border-black flex">

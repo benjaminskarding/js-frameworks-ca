@@ -6,6 +6,7 @@ import DecorativeCornersSmall from "../../Utilities/decorativeCornersSmall";
 import { CartContext } from "../../Context/cartContext";
 import { findCategoryForProduct } from "../../Utilities/findCategoryForProduct";
 import MobileProductLayout from "../../Components/singleProductPageMobileLayoutComp";
+import { motion } from "framer-motion";
 
 function SingleProductPage() {
   const { productId } = useParams();
@@ -56,6 +57,7 @@ function SingleProductPage() {
       id: product.id,
       title: product.title,
       price: product.price,
+      discountedPrice: product.discountedPrice || null,
       image: product.image?.url,
       category,
     });
@@ -64,7 +66,13 @@ function SingleProductPage() {
   const isMobile = windowWidth < 1350;
 
   return (
-    <>
+    <motion.div
+      className="min-h-screen" // adjust as needed
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5 }}
+    >
       {isMobile ? (
         <MobileProductLayout
           product={product}
@@ -86,7 +94,7 @@ function SingleProductPage() {
             {/* Product Details */}
             <div className="max-w-3xl relative">
               {/* Top rectangle */}
-              <div className="relative flex justify-center items-center w-1/3 border border-black p-4 mb-[-1px]">
+              <div className="relative flex justify-center items-center w-1/3 border border-black p-4 mb-[-1px] h-[6rem]">
                 <p className="text-xl font-semibold uppercase">
                   {product.title}
                 </p>
@@ -101,14 +109,24 @@ function SingleProductPage() {
               {/* Bottom rectangles container */}
               <div className="flex justify-end ml-72">
                 {/* Price rectangle */}
-                <div className="flex justify-center items-center w-3/4 border border-black border-t-0 p-4">
+                <div className="flex flex-col items-center justify-center w-3/4 border border-black border-t-0 p-4">
+                  {/* Display Discounted Price */}
                   <p className="text-lg font-semibold text-center">
-                    {product.price}KR
+                    {product.discountedPrice}KR
                   </p>
+
+                  {/* Show Original Price & Discount % if applicable */}
+                  {product.price > product.discountedPrice && (
+                    <div className="flex flex-col items-center">
+                      <p className="line-through text-gray-500">
+                        {product.price}KR
+                      </p>
+                    </div>
+                  )}
                 </div>
 
                 <SubmitButton
-                  className="border-t-0 border-l-0"
+                  className="border-t-0 border-l-0 h-[6rem]"
                   text="ADD TO CART"
                   onClick={handleAddToCart}
                 />
@@ -120,7 +138,7 @@ function SingleProductPage() {
           </div>
         </div>
       )}
-    </>
+    </motion.div>
   );
 }
 

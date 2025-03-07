@@ -32,7 +32,7 @@ const ProductSection2 = () => {
                           className="absolute inset-0 w-full h-full object-cover"
                         />
                       </div>
-                      <h4 className="mt-2 text-center md:text-start text-3xl md:text-4xl font-medium uppercase">
+                      <h4 className="mt-2 text-center md:text-start text-2xl md:text-4xl font-medium uppercase">
                         {product.title}
                       </h4>
                     </Link>
@@ -42,7 +42,7 @@ const ProductSection2 = () => {
 
               {/* Desktop-only Button Below the Grid */}
               <div className="flex-grow"></div>
-              <div className="flex justify-start mb-14 hidden lg:flex">
+              <div className="justify-start mb-14 hidden lg:flex">
                 <ConceptButton href="/products/all-products" />
               </div>
             </div>
@@ -58,7 +58,7 @@ const ProductSection2 = () => {
                   />
                 </div>
               </Link>
-              <h3 className="mt-4 text-center md:text-start text-3xl md:text-4xl font-medium uppercase">
+              <h3 className="mt-4 text-center md:text-start text-2xl md:text-4xl font-medium uppercase">
                 {products[2]?.title}
               </h3>
             </div>

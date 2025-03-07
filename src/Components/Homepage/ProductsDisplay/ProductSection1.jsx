@@ -30,7 +30,7 @@ const ProductSection = () => {
                   />
                 </div>
               </Link>
-              <h3 className="mt-4 text-center md:text-start text-3xl md:text-4xl font-medium uppercase">
+              <h3 className="mt-4 text-center md:text-start text-2xl md:text-4xl font-medium uppercase">
                 {products[0]?.title}
               </h3>
             </div>
@@ -48,7 +48,7 @@ const ProductSection = () => {
                           className="absolute inset-0 w-full h-full object-cover"
                         />
                       </div>
-                      <h4 className="mt-2 text-center md:text-start text-3xl md:text-4xl font-medium uppercase">
+                      <h4 className="mt-2 text-center md:text-start text-2xl md:text-4xl font-medium uppercase">
                         {product.title}
                       </h4>
                     </Link>
@@ -58,7 +58,7 @@ const ProductSection = () => {
               {/*  Push Button to the Bottom */}
               <div className="flex-grow"></div>{" "}
               {/* Spacer to push button down */}
-              <div className="flex justify-center md:justify-end mb-14 pt-12 md:pt-0">
+              <div className="flex justify-center lg:justify-end mb-14 mt-8 pt-12 md:pt-0 ">
                 <NavigateButton href="/products/all-products" />
               </div>
             </div>

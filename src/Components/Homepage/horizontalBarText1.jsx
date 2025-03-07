@@ -8,6 +8,14 @@ export default function HorizontalBarText1() {
   const sectionRef = useRef(null);
 
   useEffect(() => {
+    if (window.innerWidth < 768) {
+      // If mobile, make text instantly visible
+      sectionRef.current.style.opacity = "1";
+      sectionRef.current.style.transform = "none";
+      return;
+    }
+
+    // Run GSAP animation only on larger screens
     gsap.fromTo(
       sectionRef.current,
       {
@@ -33,8 +41,7 @@ export default function HorizontalBarText1() {
       ref={sectionRef}
       className="text-5xl md:text-7xl text-center md:text-start"
     >
-      THE DESTINATION FOR ALL THINGS UNIQUE, EVERYDAY, AND EVERYTHING IN
-      BETWEEN.
+      THE DESTINATION FOR ALL THINGS UNIQUE.
     </div>
   );
 }

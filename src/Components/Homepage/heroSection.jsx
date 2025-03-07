@@ -9,15 +9,17 @@ export default function HeroSection() {
         alt="Placeholder"
       />
 
-      <div className="absolute bottom-8 left-8 z-10 text-[#00335D] flex flex-col">
-        <p className="uppercase tracking-wide pl-[0.7vw] mb-2 sm:-mb-7 sm:text-[1.5em] font-semibold">
+      <div className="absolute bottom-8 left-[5vw] z-10 text-[#00335D] flex flex-col">
+        <p className="uppercase tracking-wide pl-[1vw] -mb-2 text-[4vw] sm:text-[4vw] md:text-3xl lg:text-5xl font-semibold">
           COLD PRECISION
         </p>
-        <h2 className="text-[9vw] font-medium leading-none">KRUG</h2>
+        <h2 className="text-[15vw] sm:text-[15vw] md:text-[15vw] lg:text-[15rem] font-medium leading-none">
+          KRUG
+        </h2>
       </div>
 
-      <div className="absolute bottom-8 right-8 z-10 flex space-x-4 text-[2vw]">
-        <p>Releasing 12.05.2025</p>
+      <div className="absolute bottom-8 mb-2 md:mb-4 lg:mb-6 right-[5vw] z-10 flex text-[4vw] sm:text-[2.5vw] md:text-[2vw] lg:text-[1.5vw]">
+        <p>Coming 12.05.2025</p>
       </div>
     </div>
   );
