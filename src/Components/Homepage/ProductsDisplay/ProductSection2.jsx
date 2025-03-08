@@ -49,18 +49,27 @@ const ProductSection2 = () => {
 
             {/* Right Column - Large Main Image */}
             <div className="col-span-full lg:col-span-6">
-              <Link to={`/product/${products[0]?.id}`}>
-                <div className="relative w-full overflow-hidden border border-black">
-                  <img
-                    src={products[2]?.image.url}
-                    alt={products[2]?.image.alt}
-                    className="w-full h-auto object-cover"
-                  />
-                </div>
-              </Link>
-              <h3 className="mt-4 text-center md:text-start text-2xl md:text-4xl font-medium uppercase">
-                {products[2]?.title}
-              </h3>
+              {products.length > 2 ? (
+                <Link to={`/product/${products[2].id}`}>
+                  <div className="relative w-full overflow-hidden border border-black">
+                    <img
+                      src={products[2].image.url}
+                      alt={products[2].image.alt}
+                      className="w-full h-auto object-cover"
+                    />
+                  </div>
+                </Link>
+              ) : (
+                <p className="text-center text-gray-500">
+                  No additional product available.
+                </p>
+              )}
+
+              {products.length > 2 && (
+                <h3 className="mt-4 text-center md:text-start text-2xl md:text-4xl font-medium uppercase">
+                  {products[2].title}
+                </h3>
+              )}
             </div>
           </>
         )}
