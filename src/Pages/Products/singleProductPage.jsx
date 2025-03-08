@@ -104,7 +104,7 @@ function SingleProductPage() {
             <div className="max-w-3xl relative">
               {/* Top rectangle */}
               <div className="relative flex justify-center items-center w-1/3 border border-black p-4 mb-[-1px] h-[6rem]">
-                <p className="text-xl font-semibold uppercase">
+                <p className="text-xl font-semibold uppercase text-center">
                   {product.title}
                 </p>
                 <DecorativeCornersSmall />
@@ -140,7 +140,7 @@ function SingleProductPage() {
                   onClick={handleAddToCart}
                 />
               </div>
-              {/* Reviews Section (if reviews exist) */}
+              {/* Reviews Section (Only if reviews exist) */}
               {product.reviews && product.reviews.length > 0 && (
                 <div className="mt-8 border-t border-black pt-6">
                   <h3 className="text-xl font-semibold mb-4">
@@ -165,7 +165,6 @@ function SingleProductPage() {
                   </ul>
                 </div>
               )}
-
               {/*  bottom-right square dot */}
               <div className="absolute bottom-0 right-0 w-1.5 h-1.5 bg-black"></div>
             </div>
