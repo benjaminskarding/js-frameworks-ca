@@ -5,7 +5,7 @@ import { fetchProductById } from "../../API/fetch";
 import DecorativeCornersSmall from "../../Utilities/decorativeCornersSmall";
 import { CartContext } from "../../Context/cartContext";
 import { findCategoryForProduct } from "../../Utilities/findCategoryForProduct";
-import MobileProductLayout from "../../Components/singleProductPageMobileLayoutComp";
+import MobileProductLayout from "./singleProductPageMobileLayoutComp";
 import { motion } from "framer-motion";
 
 function SingleProductPage() {
@@ -86,6 +86,7 @@ function SingleProductPage() {
         <MobileProductLayout
           product={product}
           handleAddToCart={handleAddToCart}
+          reviews={product.reviews}
         />
       ) : (
         <div className="flex justify-center items-center px-auto pt-56">
@@ -139,6 +140,31 @@ function SingleProductPage() {
                   onClick={handleAddToCart}
                 />
               </div>
+              {/* Reviews Section (if reviews exist) */}
+              {product.reviews && product.reviews.length > 0 && (
+                <div className="mt-8 border-t border-black pt-6">
+                  <h3 className="text-xl font-semibold mb-4">
+                    Customer Reviews
+                  </h3>
+                  <ul className="space-y-4">
+                    {product.reviews.map((review) => (
+                      <li
+                        key={review.id}
+                        className="border border-gray-300 p-4 rounded-lg"
+                      >
+                        <p className="font-semibold">{review.username}</p>
+                        <div className="flex items-center">
+                          <span className="text-yellow-500">
+                            {"★".repeat(review.rating)}
+                            {"☆".repeat(5 - review.rating)}
+                          </span>
+                        </div>
+                        <p className="text-sm mt-2">{review.description}</p>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
 
               {/*  bottom-right square dot */}
               <div className="absolute bottom-0 right-0 w-1.5 h-1.5 bg-black"></div>

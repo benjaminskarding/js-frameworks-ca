@@ -1,8 +1,8 @@
 import React from "react";
-import SubmitButton from "./Buttons/submitButton";
-import DecorativeCornersSmall from "../Utilities/decorativeCornersSmall";
+import SubmitButton from "../../Components/Buttons/submitButton";
+import DecorativeCornersSmall from "../../Utilities/decorativeCornersSmall";
 
-const MobileProductLayout = ({ product, handleAddToCart }) => {
+const MobileProductLayout = ({ product, handleAddToCart, reviews }) => {
   return (
     <div className="flex flex-col items-center p-4 mt-6 md:mt-0">
       <div className="flex justify-center items-center">
@@ -38,6 +38,29 @@ const MobileProductLayout = ({ product, handleAddToCart }) => {
           onClick={handleAddToCart}
         />
       </div>
+      {/* Reviews Section */}
+      {reviews && reviews.length > 0 && (
+        <div className="mt-8 border-t border-black pt-4 w-full">
+          <h3 className="text-lg font-semibold text-center mb-2">
+            Customer Reviews
+          </h3>
+          <ul className="space-y-3 text-center">
+            {reviews.map((review) => (
+              <li
+                key={review.id}
+                className="border border-gray-300 p-3 rounded-md"
+              >
+                <p className="font-semibold">{review.username}</p>
+                <div className="text-yellow-500">
+                  {"★".repeat(review.rating)}
+                  {"☆".repeat(5 - review.rating)}
+                </div>
+                <p className="mt-1">{review.description}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   );
 };
