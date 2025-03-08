@@ -15,7 +15,6 @@ function SingleProductPage() {
   const [error, setError] = useState(null);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [buttonText, setButtonText] = useState("ADD TO CART");
-  const [animateText, setAnimateText] = useState(false);
 
   const { addToCart } = useContext(CartContext);
 
@@ -65,12 +64,11 @@ function SingleProductPage() {
     });
 
     // Change button text to "ADDED TO CART"
-    setAnimateText(true);
+
     setButtonText("ADDED TO CART");
 
     setTimeout(() => {
       setButtonText("ADD TO CART");
-      setAnimateText(false);
     }, 2000);
   }
 
